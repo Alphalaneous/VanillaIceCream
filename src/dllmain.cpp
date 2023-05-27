@@ -273,7 +273,7 @@ void __fastcall CustomSongWidget_updateSongInfo_H(gd::CustomSongWidget* self, vo
 
     CCMenuItem* moreButton = getFromObjectIndex<CCMenu*, CCMenuItem*>(menu, 5);
 
-    moreButton->setPositionX(artistLabel->getScaledContentSize().width - 387);
+    moreButton->setPositionX(artistLabel->getScaledContentSize().width - 388.5);
 
 }
 
