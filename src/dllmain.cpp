@@ -276,8 +276,11 @@ void __fastcall CustomSongWidget_updateSongInfo_H(gd::CustomSongWidget* self, vo
     //388.5
 
     //normal -239.1
+    // + artistLabel->getScaledContentSize().width/2 + 38.9
 
-    moreButton->setPositionX(artistLabel->getPositionX()*2 + 38.9);
+
+
+    moreButton->setPositionX(artistLabel->getPositionX() - menu->getPositionX() + artistLabel->getScaledContentSize().width + 38.0);
 
 }
 
