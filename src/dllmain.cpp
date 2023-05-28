@@ -273,7 +273,11 @@ void __fastcall CustomSongWidget_updateSongInfo_H(gd::CustomSongWidget* self, vo
 
     CCMenuItem* moreButton = getFromObjectIndex<CCMenu*, CCMenuItem*>(menu, 5);
 
-    moreButton->setPositionX(artistLabel->getScaledContentSize().width - 388.5);
+    //388.5
+
+    //normal -239.1
+
+    moreButton->setPositionX(artistLabel->getPositionX()*2 + 38.9);
 
 }
 
@@ -311,9 +315,7 @@ CCNode* __fastcall EndLevelLayer_create_H(CCNode* self, void*) {
 
     CCMenu* menu = getFromObjectIndex<CCLayer*, CCMenu*>(layer, 1);
 
-    CCNode* editButton = getFromObjectIndex<CCMenu*, CCNode*>(menu, 2);
-
-    editButton->setPosition({ 0, editButton->getPositionY() });
+    
 
     CCLabelBMFont* extraText = getFromObjectIndex<CCLayer*, CCLabelBMFont*>(layer, 3);
     CCLabelBMFont* extraText2 = getFromObjectIndex<CCLayer*, CCLabelBMFont*>(layer, 4);
@@ -338,6 +340,10 @@ CCNode* __fastcall EndLevelLayer_create_H(CCNode* self, void*) {
     CCNode* textArea = getFromObjectContentSizeWidth<CCLayer*, CCNode*>(layer, 2480);
 
     gd::PlayLayer* playLayer = gd::PlayLayer::get();
+
+    gd::GJGameLevel* level = playLayer->m_level;
+
+    gd::GJLevelType levelType = level->m_eLevelType;
 
     bool isTestMode = playLayer->m_isTestMode;
     bool isPracticeMode = playLayer->m_isPracticeMode;
@@ -371,9 +377,17 @@ CCNode* __fastcall EndLevelLayer_create_H(CCNode* self, void*) {
     CCNode* restartButton = getFromObjectIndex<CCMenu*, CCNode*>(menu, 0);
     CCNode* menuButton = getFromObjectIndex<CCMenu*, CCNode*>(menu, 3);
 
+    CCNode* editButton = getFromObjectIndex<CCMenu*, CCNode*>(menu, 2);
+
+    if (levelType == gd::kGJLevelTypeEditor) {
+        editButton->setPosition({ 0, editButton->getPositionY() });
+    }
+
     if (isPracticeMode) {
-        restartButton->setPosition({ restartButton->getPositionX() + 25, restartButton->getPositionY() });
-        menuButton->setPosition({ menuButton->getPositionX() - 25, menuButton->getPositionY() });
+        if (levelType == gd::kGJLevelTypeEditor) {
+            restartButton->setPosition({ restartButton->getPositionX() + 25, restartButton->getPositionY() });
+            menuButton->setPosition({ menuButton->getPositionX() - 25, menuButton->getPositionY() });
+        }
     }
 
     if (isTestMode && isPracticeMode) {
